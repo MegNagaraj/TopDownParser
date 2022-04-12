@@ -1,13 +1,16 @@
-Parser Program for TinyPL
--------------------------
+Parser Program for TinyPL with the below grammar that translates every TinyPL program into a sequence of byte-codes for the Java Virtual Machine.
+-------------------------------------------------------------------------------------------------------------------------------------------------
 
-Author: Meghana Nagaraj
-CSU ID: 2805897
-
-NOTE:
-* Please run the Parser.java class within the 'parser_sep' package, as I have followed a differnt approach of having non terminals in separate java files, instead of nested class.
-* While entering test cases, please terminate code with 'end', and press enter key.
-
-
-
-*TEST*
+program -> decls stmts end
+decls -> int idlist ;
+idlist -> id { , id }
+stmts -> stmt [ stmts ]
+cmpdstmt-> '{' stmts '}'
+stmt -> assign | cond | loop
+assign -> id = expr ;
+cond -> if '(' rexp ')' cmpdstmt [ else cmpdstmt ]
+loop -> while '(' rexp ')' cmpdstmt
+rexp -> expr (< | > | =) expr
+expr -> term [ (+ | -) expr ]
+term -> factor [ (* | /) term ]
+factor -> int_lit | id | '(' expr ')'
